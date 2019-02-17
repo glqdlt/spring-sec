@@ -14,6 +14,11 @@ public class CustomUserDetailService implements UserDetailsService {
         if(aa == null){
             throw new UsernameNotFoundException(s+"is Not Founded User!");
         }
-        return org.springframework.security.core.userdetails.User.withUsername(aa.getId()).password(aa.getPassword()).passwordEncoder((s1) -> s1).authorities(aa.getRole()).build();
+        return org.springframework.security.core.userdetails.User
+                .withUsername(aa.getId())
+                .password(aa.getPassword())
+                .passwordEncoder((s1) -> s1)
+                .roles(aa.getRole())
+                .build();
     }
 }
