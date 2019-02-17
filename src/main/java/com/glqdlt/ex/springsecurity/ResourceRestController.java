@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResourceRestController {
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping("/api/protected/area")
-    public String protectedResource(){
-        return "good";
+    @PreAuthorize("hasRole('admin')")
+    @GetMapping("/api/protected/admin")
+    public String protectedAdminResource(){
+        return "admin";
+    }
+
+    @PreAuthorize("hasAnyRole('admin','user')")
+    @GetMapping("/api/protected/user")
+    public String protectedUserResource(){
+        return "user";
     }
 
     @GetMapping("/")
