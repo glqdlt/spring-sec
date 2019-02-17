@@ -1,5 +1,7 @@
 package com.glqdlt.ex.springsecurity;
 
+import com.zaxxer.hikari.HikariDataSource;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,10 @@ public class SpringSecurityApplicationTests {
 
 	@Test
 	public void isSourceH2() throws Exception {
+		final String _DRIVER_NAME = "org.h2.Driver";
+		HikariDataSource sss = (HikariDataSource) this.dataSource;
+		String className = sss.getDriverClassName();
+		Assert.assertEquals(_DRIVER_NAME,className);
 	}
 }
 
