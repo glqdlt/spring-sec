@@ -1,5 +1,7 @@
-package com.glqdlt.ex.springsecurity;
+package com.glqdlt.ex.springsecurity.config;
 
+import com.glqdlt.ex.springsecurity.persistence.user.User;
+import com.glqdlt.ex.springsecurity.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

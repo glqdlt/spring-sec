@@ -1,4 +1,4 @@
-package com.glqdlt.ex.springsecurity;
+package com.glqdlt.ex.springsecurity.persistence.user;
 
 import lombok.Data;
 

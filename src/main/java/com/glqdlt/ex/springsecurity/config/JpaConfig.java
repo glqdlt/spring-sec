@@ -1,6 +1,9 @@
-package com.glqdlt.ex.springsecurity;
+package com.glqdlt.ex.springsecurity.config;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -14,10 +17,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
+@ConfigurationProperties(prefix = "myapp.hibernate")
 @EnableTransactionManagement
 @Configuration
+@Data
 public class JpaConfig {
+
+    private String dialect;
+    private String hbm2ddl;
 
     @Bean
     public PlatformTransactionManager transactionManager(
@@ -29,7 +36,7 @@ public class JpaConfig {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired @Qualifier("myDataSource") DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
@@ -43,10 +50,13 @@ public class JpaConfig {
     }
 
     Properties additionalProperties() {
+        final String _DDL = "hibernate.hbm2ddl.auto";
+        final String _DIALECT = "hibernate.dialect";
+
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "none");
+        properties.setProperty(_DDL, hbm2ddl);
         properties.setProperty(
-                "hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+                _DIALECT, dialect);
 
         return properties;
     }

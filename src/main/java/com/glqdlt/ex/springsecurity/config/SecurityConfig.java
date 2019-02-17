@@ -1,4 +1,4 @@
-package com.glqdlt.ex.springsecurity;
+package com.glqdlt.ex.springsecurity.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
